@@ -12,7 +12,7 @@ interface CodeTelemetryViewerProps {
     memoryUsageKb?: number;
     cyclomaticComplexity?: number;
     testPassRate?: number;
-    aiReview?: Record<string, unknown>;
+    aiReview?: string | Record<string, unknown>;
   };
 }
 
