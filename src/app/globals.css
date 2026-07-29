@@ -204,8 +204,22 @@
 }
 
 /* ─── Backward compatibility aliases ─── */
-.editorial-card { @apply glass-card; }
-.bento-glass { @apply glass-panel; }
+.editorial-card { 
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.bento-glass {
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-xl);
+}
 .bento-glass-hover { @apply hover:-translate-y-1 hover:shadow-[var(--shadow-glow)]; }
 .bg-paper { @apply bg-background; }
 .text-ink { @apply text-foreground; }
