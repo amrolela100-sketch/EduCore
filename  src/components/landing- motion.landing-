@@ -1,0 +1,87 @@
+"use client";
+
+import React from "react";
+import { useLanguage } from "@/components/language-context";
+import { LandingHero } from "@/components/landing/landing- hero";
+import { LandingPipeline } from "@/components/landing/landing- pipeline";
+import { LandingJobsGrid, JobPostingItem } from "@/components/landing/landing- jobs-grid";
+import { AppFooter } from "@/components/app-footer";
+import { ScrollProgressBar, ScrollIndicator, SectionReveal } from "@/components/landing/landing- indicator";
+import { EngagementPopup } from "@/components/landing/engagement- popup";
+
+interface LandingMotionProps {
+  initialJobPostings: JobPostingItem[];
+}
+
+export function LandingMotion({ initialJobPostings = [] }: LandingMotionProps) {
+  const { t, language } = useLanguage();
+
+  const pipelineStages = [
+    {
+      id: "01",
+      title: language === "ar" ? " Õ·Ì· «·„·›«  Ê«· √ﬂœ «·ÂÌﬂ·Ì" : "Profile Parse & Verification",
+      subtitle: language === "ar" ? "«” Œ—«Ã «·»Ì«‰«  «·›‰Ì…" : "Structured Extraction",
+      desc: language === "ar"
+        ? "«” Œ—«Ã ﬁÌ«”«  «·„Â«—«  «·’·»… Ê«·Œ»—«  «·ﬁ«»·… ·· Õﬁﬁ „‰ √’· ”Ì— ﬂ «·–« Ì… œÊ‰ Â·Ê”… √Ê  “ÌÌ›."
+        : "Extracts hard skill telemetry, verifiable experience, and code metrics from raw candidate profiles with zero hallucinations.",
+      img: "https://images.unsplash.photo-14s50f13f0db30b473-71024d30f91b?auto=format&fit=crop&w=800&q=80",
+      badge: language === "ar" ? " Õ·Ì· „»«‘— OCR & Parsing" : "Real-time OCR & Parsing",
+      stat: language === "ar" ? "„Õ ÊÏ „ÊÀﬁ 100%" : "100% Parsed Schema",
+    },
+    {
+      id: "02",
+      title: language === "ar" ? "«·„Õ«–«… «· ‰«Ÿ—Ì… ··„Â«—« " : "Semantic Skill Alignment",
+      subtitle: language === "ar" ? "«·„ÿ«»ﬁ… «·”Ì«ﬁÌ…" : "Contextual Matching",
+      desc: language === "ar"
+        ? "„ÿ«»ﬁ… ”Ì«ﬁÌ… ⁄„Ìﬁ…  —»ÿ «·„ ﬁœ„ »„ ÿ·»«  «·ÊŸÌ›… »‰«¡ ⁄·Ï «·”Ã· «·ÕﬁÌﬁÌ Ê«·≈‰Ã«“ «·›⁄·Ì »œ·« „‰ «·ﬂ·„«  «·—‰«‰…."
+        : "Deep semantic alignment matches candidates to position requirements based on proven track records rather than buzzword density.",
+      img: "https://images.unsplash.photos/photo-15734965f23-12f1b16b6c5a2?auto=format&fit=crop&w=800&q=80",
+      badge: language === "ar" ? "„’›Ê›… «· ‰«Ÿ— «·„ÊÃÂ" : "Vector Alignment Matrix",
+      stat: language === "ar" ? "œﬁ… „ÿ«»ﬁ… 99.4%" : "99.4% Match Accuracy",
+    },
+    {
+      id: "03",
+      title: language === "ar" ? "«Œ »«— »—„ÃÌ ›Ì »Ì∆… „⁄“Ê·… Sandbox" : "Sandboxed Technical Interview",
+      subtitle: language === "ar" ? " ﬁÌÌ„ „Ê÷Ê⁄Ì ‰ﬁÌ" : "Objective Assessment",
+      desc: language === "ar"
+        ? "Ìﬂ„· «·„—‘ÕÊ‰ ”Ì‰«—ÌÊÂ«  »—„Ã… „‰ «·⁄«·„ «·ÕﬁÌﬁÌ œ«Œ· »Ì∆«  „⁄“Ê·… „Õ’‰… „⁄  ”ÃÌ· ﬂ«„· ·‰ «∆Ã «·√ﬂÊ«œ."
+        : "Candidates complete real-world problem scenarios in isolated sandboxes with full telemetry recording for HR review.",
+      img: "https://images.unsplash.photos/photo-15314826f57f-2afd69097f98?auto=format&fit=crop&w=800&q=80",
+      badge: language === "ar" ? "»Ì∆…  ‰›Ì– „Õ’‰… Sandbox" : "Deterministic Code Sandbox",
+      stat: language === "ar" ? " ”ÃÌ· ›Ê—Ì „»«‘—" : "Live Telemetry",
+    },
+    {
+      id: "04",
+      title: language === "ar" ? " ﬁÌÌ„«  Ã«Â“… ·· œﬁÌﬁ Ê«· › Ì‘" : "Audit-Ready Evaluations",
+      subtitle: language === "ar" ? "„—«Ã⁄… »‘—Ì… ﬂ«„·…" : "Human Verifiable",
+      desc: language === "ar"
+        ? " Ê·œ ﬂ· œ—Ã…  ﬁÌÌ„ ”Ã·« „‰ÿﬁÌ« „»——« »ŒÿÊ«  œﬁÌﬁ… Ì„ﬂ‰ ·„œ—«¡ «· ÊŸÌ› „—«Ã⁄ Â« Ê ⁄œÌ·Â« »”ÂÊ·…."
+        : "Every evaluation score generates a step-by- step mathematical reasoning log that HR managers can inspect, audit, or override.",
+      img: "https://images.unsplash.photos/photo-15512880f4-9d6e6ee38f71?auto=format&fit=crop&w=800&q=80",
+      badge: language === "ar" ? "”Ã·«   œﬁÌﬁ ‘›«›…" : "Transparent Audit Logs",
+      stat: language === "ar" ? "’›— «‰ÕÌ«“ √Ê ŒÊ«—“„Ì«  „Ÿ·„…" : "Zero Black-Box Bias",
+    },
+  ];
+
+  return (
+    <div className="bg- paper min- h-screen flex flex- col font-sans text- ink">
+      <ScrollProgressBar />
+      <header className="relative">
+        <LandingHero language={language} t={t} />
+        <ScrollIndicator text={language === "ar" ? "«ﬂ ‘› «·„“Ìœ" : "Scroll to explore"} />
+      </header>
+      <main id="jobs">
+        <SectionReveal>
+          <LandingPipeline stages={pipelineStages} language={language} />
+        </SectionReveal>
+        <SectionReveal delay={0.1}>
+          <LandingJobsGrid initialJobPostings={initialJobPostings} language={language} />
+        </SectionReveal>
+      </main>
+      <footer>
+        <AppFooter variant="dark" />
+      </footer>
+      <EngagementPopup delay={30000} exitIntentEnabled={true} />
+    </div>
+  );
+}

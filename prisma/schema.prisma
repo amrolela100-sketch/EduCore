@@ -1,0 +1,383 @@
+datasource db {
+  provider = "postgresql"
+}
+
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum JobPostingStatus {
+  DRAFT
+  OPEN
+  CLOSED
+  FILLED
+}
+
+enum ApplicationStatus {
+  APPLIED
+  MATCHED
+  INTERVIEWING
+  EVALUATED
+  ACCEPTED
+  REJECTED
+}
+
+enum InterviewSessionStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum AgentExecutionStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id           String             @id @default(uuid())
+  email        String             @unique
+  name         String?
+  passwordHash String
+  emailVerified               Boolean   @default(false)
+  emailVerificationToken      String?   @unique
+  emailVerificationExpiresAt DateTime?
+  passwordResetToken          String?   @unique
+  passwordResetExpiresAt      DateTime?
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+
+  
+  // Relations
+  roleId       String
+  role         Role               @relation(fields: [roleId], references: [id])
+  profile      CandidateProfile?
+  assessments  Assessment[]       // Assessments conducted by this user (e.g. HR Admin or Tech Admin)
+  auditLogs    AuditLog[]
+  notifications Notification[]
+
+  @@index([email])
+  @@index([roleId])
+}
+
+model Role {
+  id          String       @id @default(uuid())
+  name        String       @unique // CANDIDATE, HR_ADMIN, TECH_ADMIN, SYSTEM_ADMIN
+  description String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  // Relations
+  users       User[]
+  permissions RolePermission[]
+
+  @@index([name])
+}
+
+model Permission {
+  id          String       @id @default(uuid())
+  name        String       @unique // e.g., READ_JOBS, APPLY, VIEW_RANKINGS
+  description String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  // Relations
+  roles       RolePermission[]
+}
+
+// Many-to-many relationship join table for Role and Permission
+model RolePermission {
+  roleId       String
+  permissionId String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}
+
+model CandidateProfile {
+  id             String        @id @default(uuid())
+  userId         String        @unique
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skills         String[]
+  experience     Json?         // Structured work experience
+  education      Json?         // Structured education history
+  certifications Json?         // List of certifications
+  languages      Json?         // List of languages spoken
+  projects       Json?         // List of projects
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // Relations
+  resumes        Resume[]
+  portfolios     Portfolio[]
+  applications   Application[]
+
+  @@index([userId])
+}
+
+model Resume {
+  id                 String           @id @default(uuid())
+  fileName           String
+  fileUrl            String
+  extractedText      String
+  uploadedAt         DateTime         @default(now())
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  
+  candidateProfileId String
+  candidateProfile   CandidateProfile @relation(fields: [candidateProfileId], references: [id], onDelete: Cascade)
+  tailoredResumes    TailoredResume[]
+
+  @@index([candidateProfileId])
+}
+
+model Portfolio {
+  id                 String           @id @default(uuid())
+  fileName           String
+  fileUrl            String
+  uploadedAt         DateTime         @default(now())
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  
+  candidateProfileId String
+  candidateProfile   CandidateProfile @relation(fields: [candidateProfileId], references: [id], onDelete: Cascade)
+}
+
+model Company {
+  id          String       @id @default(uuid())
+  name        String       @unique
+  description String?
+  website     String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  // Relations
+  jobPostings JobPosting[]
+}
+
+model JobPosting {
+  id           String        @id @default(uuid())
+  title        String
+  description  String
+  requirements String[]      // Required skills
+  salaryRange  String?
+  location     String?
+  status       JobPostingStatus @default(OPEN)
+  archetype    String?       // AUTO-DETECTED: BACKEND, FRONTEND, FULLSTACK, DEVOPS, DATA, AI_ML, MANAGEMENT, OTHER
+  sourceUrl    String?       // Original job URL (for imported jobs)
+  sourceType   String?       // MANUAL, GREENHOUSE, LEVER, etc.
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relations
+  companyId       String
+  company         Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  applications    Application[]
+  tailoredResumes TailoredResume[]
+
+  @@index([companyId])
+  @@index([status])
+}
+
+model Application {
+  id                 String           @id @default(uuid())
+  status             ApplicationStatus @default(APPLIED)
+  matchScore         Float?
+  missingSkills      String[]
+  gapAnalysis        Json?            // Enhanced gap analysis: { criticalGaps, niceToHaveGaps, transferableSkills, learningPath }
+  rankingReason      String           @default("") @db.Text // Required for compliance
+  rankingPosition    Int?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  // Relations
+  candidateProfileId String
+  candidateProfile   CandidateProfile @relation(fields: [candidateProfileId], references: [id], onDelete: Cascade)
+  jobPostingId       String
+  jobPosting         JobPosting       @relation(fields: [jobPostingId], references: [id], onDelete: Cascade)
+  interviewSessions  InterviewSession[]
+  matchEvaluation    JobMatchEvaluation?
+
+  @@unique([candidateProfileId, jobPostingId])
+  @@index([candidateProfileId])
+  @@index([jobPostingId])
+  @@index([status])
+}
+
+
+model InterviewSession {
+  id             String               @id @default(uuid())
+  status         InterviewSessionStatus @default(SCHEDULED)
+  transcript     Json?                 // Chat/Question-Answer log
+  submittedCode  String?               @db.Text
+  sandboxOutput  String?               @db.Text
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+
+  // Relations
+  applicationId  String
+  application    Application           @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  assessments    Assessment[]
+
+  @@index([applicationId])
+}
+
+model InterviewQuestion {
+  id           String   @id @default(uuid())
+  text         String
+  type         String   // CODING, TECHNICAL, BEHAVIORAL
+  codingPrompt String?  @db.Text
+  testCases    Json?    // Array of { input: string, expectedOutput: string }
+  points       Int      @default(10)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Assessment {
+  id                 String             @id @default(uuid())
+  overallScore       Float
+  summary            String             @db.Text
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  interviewSessionId String
+  interviewSession   InterviewSession   @relation(fields: [interviewSessionId], references: [id], onDelete: Cascade)
+  evaluatorId        String
+  evaluator          User               @relation(fields: [evaluatorId], references: [id])
+  scores             AssessmentScore[]
+}
+
+model AssessmentScore {
+  id           String     @id @default(uuid())
+  dimension    String     // e.g. "code quality", "problem-solving", "communication"
+  score        Float
+  justification String    @db.Text // Required justification
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  // Relations
+  assessmentId String
+  assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+}
+
+model AgentExecution {
+  id         String               @id @default(uuid())
+  agentName  String               // dispatcher, profiler, job_matcher, interviewer, evaluator, ranker
+  sessionId  String
+  turnId     String?
+  prompt     String               @db.Text
+  response   String               @db.Text
+  tokens     Int?
+  cost       Float?
+  durationMs Int?
+  status     AgentExecutionStatus @default(PENDING)
+  error      String?              @db.Text
+  createdAt  DateTime             @default(now())
+  updatedAt  DateTime             @updatedAt
+
+  @@index([sessionId])
+  @@index([agentName])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  details   Json?
+  ipAddress String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  title     String
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+}
+
+model ApiProvider {
+  id           String   @id @default(uuid())
+  name         String   @unique
+  providerKey  String   // "google", "openai", "anthropic", "custom"
+  baseUrl      String?
+  encryptedKey String?  // Encrypted API key (AES-256-GCM)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SystemSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique // e.g., "agent_dispatcher_model"
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// AI-powered job match evaluation using career-ops A-F rubric (1.0-5.0 scoring)
+model JobMatchEvaluation {
+  id                 String   @id @default(uuid())
+  overallScore       Float    // Weighted average 1.0-5.0
+  profileMatchScore  Float    // A: Skills, experience, qualifications alignment
+  growthScore        Float    // B: Growth opportunity and learning potential
+  compensationScore  Float    // C: Compensation and benefits alignment
+  cultureFitScore    Float    // D: Company culture and values fit
+  roleClarityScore   Float    // E: Role requirements clarity and realism
+  redFlagScore       Float    // F: Red flags and warning signals (inverted: 5.0 = no red flags)
+  summary            String   @db.Text
+  gaps               String[] // Missing skills identified
+  strengths          String[] // Matching strong points
+  recommendations    String   @db.Text
+  rawAnalysis        Json?    // Full AI response for debugging
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Relations
+  applicationId      String   @unique
+  application        Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+// Per-job tailored CV generated by AI, highlighting relevant skills
+model TailoredResume {
+  id                 String     @id @default(uuid())
+  tailoredContent    String     @db.Text    // Re-ordered/highlighted resume text
+  highlightedSkills  String[]               // Skills emphasized for this job
+  matchPercentage    Float?                 // How well this CV matches the job
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+
+  // Relations
+  originalResumeId   String
+  resume             Resume     @relation(fields: [originalResumeId], references: [id], onDelete: Cascade)
+  jobPostingId       String
+  jobPosting         JobPosting @relation(fields: [jobPostingId], references: [id], onDelete: Cascade)
+
+  @@unique([originalResumeId, jobPostingId]) // One tailored resume per job per original resume
+  @@index([originalResumeId])
+  @@index([jobPostingId])
+}
