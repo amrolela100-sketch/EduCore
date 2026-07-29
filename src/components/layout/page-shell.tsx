@@ -65,7 +65,7 @@ export function PageShell({
 
   if (isPublicOrAuth) {
     return (
-      <div className={cn("min-h-screen flex flex-col mesh-bg text-foreground antialiased", className)}>
+      <div className={cn("min-h-screen flex flex-col bg-white text-ink antialiased", className)}>
         <AppNavbar
           variant={variant}
           userName={userName}
@@ -85,7 +85,7 @@ export function PageShell({
   const sidebarWidth = collapsed ? "72px" : "260px";
 
   return (
-    <div className={cn("min-h-screen flex mesh-bg text-foreground antialiased", className)}>
+    <div className={cn("min-h-screen flex bg-[#FAFAFA] text-ink antialiased", className)}>
       {/* Sidebar */}
       {role && <AppSidebar role={role} userName={userName} />}
 
@@ -95,7 +95,7 @@ export function PageShell({
         style={{ marginLeft: role ? sidebarWidth : 0 }}
       >
         {/* CRM Topbar */}
-        <header className="sticky top-0 z-20 glass-panel shadow-sm border-b-0">
+        <header className="sticky top-0 z-20 bg-white border-b border-[#EAEAEA] shadow-sm">
           <div className="flex items-center justify-between px-6 h-16 w-full">
             <div className="flex items-center gap-4">
               <MobileSidebarButton />
@@ -106,15 +106,15 @@ export function PageShell({
               )}
             </div>
             <div className="flex items-center gap-4">
-              <button className="p-2 text-foreground/60 hover:bg-foreground/5 rounded-full transition-colors relative">
+              <button className="p-2 text-ink/60 hover:bg-ink/5 rounded-full transition-colors relative">
                 <Bell className="w-5 h-5" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full border border-white/10"></span>
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-coral rounded-full border border-white"></span>
               </button>
               {navActions}
               {showLogout && (
                  <button 
                    onClick={() => signOut({ callbackUrl: "/" })}
-                   className="flex items-center gap-2 px-3 py-1.5 text-sm font-label-caps text-foreground/70 hover:bg-foreground/5 hover:text-primary rounded-md transition-colors"
+                   className="flex items-center gap-2 px-3 py-1.5 text-sm font-label-caps text-ink/70 hover:bg-ink/5 hover:text-coral rounded-md transition-colors"
                  >
                    <LogOut className="w-4 h-4" />
                    Logout
@@ -125,7 +125,7 @@ export function PageShell({
         </header>
 
         {/* Content */}
-        <main id="main-content" className="flex-grow px-6 lg:px-10 py-8 relative z-10">
+        <main id="main-content" className="flex-grow px-6 lg:px-10 py-8">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}

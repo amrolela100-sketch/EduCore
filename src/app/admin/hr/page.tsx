@@ -61,9 +61,9 @@ export default async function HrAdminDashboard() {
   return (
     <HrPageClient userName={userName}>
       <div className="space-y-8">
-        <div className="mb-8">
-          <h1 className="font-display-md text-foreground">HR Administration</h1>
-          <p className="text-muted-foreground mt-2 font-body-base">Manage candidate pipelines and oversee AI evaluations.</p>
+        <div>
+          <h1 className="font-editorial text-3xl font-medium text-ink">HR Administration</h1>
+          <p className="text-ink/60 mt-1 font-body-sm">Manage candidate pipelines and oversee AI evaluations.</p>
         </div>
 
         {/* Premium Stat Cards */}
@@ -74,7 +74,7 @@ export default async function HrAdminDashboard() {
             icon={<FileText className="w-4 h-4" />}
             trend={Math.round((pending / (total || 1)) * 100)}
             trendLabel="pending review"
-            accentColor="#8b5cf6"
+            accentColor="#0071e3"
           />
           <StatCard
             label="Accepted"
@@ -94,27 +94,27 @@ export default async function HrAdminDashboard() {
             label="Avg Match Score"
             value={`${avgScore}%`}
             icon={<TrendingUp className="w-4 h-4" />}
-            accentColor="#3b82f6"
+            accentColor="#E03E00"
           />
         </div>
 
         {/* Main Content Area */}
-        <div className="grid lg:grid-cols-3 gap-8 pt-6">
+        <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
              <div className="flex items-center justify-between">
-                <h2 className="font-display-sm text-foreground">Application Pipeline</h2>
+                <h2 className="font-editorial text-2xl font-medium text-ink">Application Pipeline</h2>
              </div>
              {/* Using HrOverrideForm which we'll assume is already a form, but we wrap it in a sleek container */}
-             <div className="glass-panel p-6">
+             <div className="bg-white rounded-xl shadow-sm border border-[#EAEAEA] p-6">
                 <HrOverrideForm initialApplications={applications} />
              </div>
           </div>
 
           <div className="space-y-6">
-             <h2 className="font-display-sm text-foreground flex items-center gap-2">
-                <BarChart3 className="w-5 h-5 text-primary"/> Audit Trace
+             <h2 className="font-editorial text-2xl font-medium text-ink flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-coral"/> Audit Trace
              </h2>
-             <div className="glass-panel p-6 max-h-[600px] overflow-y-auto">
+             <div className="bg-white rounded-xl shadow-sm border border-[#EAEAEA] p-6 max-h-[600px] overflow-y-auto">
                <HRAuditTimeline
                  events={sampleAuditEvents}
                  candidateName="مرشحي المنصة"

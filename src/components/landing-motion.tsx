@@ -73,7 +73,7 @@ export function LandingMotion({ initialJobPostings = [] }: LandingMotionProps) {
   ];
 
   return (
-    <div className="mesh-bg min-h-screen flex flex-col font-sans text-foreground">
+    <div className="bg-paper min-h-screen flex flex-col font-sans text-ink">
       <ScrollProgressBar />
       
       <LandingHero language={language} />

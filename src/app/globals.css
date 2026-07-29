@@ -5,13 +5,13 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Modern AI-themed Typography */
+  /* Atelier Zero Typography */
   --font-sans: var(--font-inter-tight);
   --font-serif: var(--font-playfair);
   --font-mono: var(--font-jetbrains-mono);
-  --font-heading: var(--font-inter-tight);
+  --font-heading: var(--font-playfair);
 
-  /* Modern Glassmorphic Color Palette */
+  /* Atelier Zero Color Palette */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -33,70 +33,76 @@
   --color-sidebar-foreground: var(--foreground);
   --color-sidebar: var(--background);
 
-  /* Modern Soft Radii */
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-2xl: 2rem;
-  --radius-3xl: 3rem;
+  /* Radii for Atelier Zero (sharp & boxy) */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
   --radius-4xl: 9999px;
 
-  /* Custom Glow and Glass Tokens */
-  --color-glass-border: rgba(255, 255, 255, 0.1);
-  --color-glass-bg: rgba(255, 255, 255, 0.03);
-  --color-glass-bg-hover: rgba(255, 255, 255, 0.08);
+  /* Specific Atelier Zero tokens */
+  --color-paper: #F9F8F6;
+  --color-ink: #181716;
+  --color-coral: #E03E00;
+  --color-dark-slab: #121110;
+  --color-dark-slab-text: #FAF8F5;
+  --color-border-dotted: rgba(24, 23, 22, 0.25);
+  --color-flag: #8B6914;
+  --color-human: #6E6E73;
   
-  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
-  --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3); /* Purple glow */
+  --shadow-paper: 0 4px 12px rgba(24, 23, 22, 0.04), 0 1px 2px rgba(24, 23, 22, 0.02);
+  --shadow-paper-hover: 0 8px 24px rgba(24, 23, 22, 0.06), 0 2px 4px rgba(24, 23, 22, 0.04);
 }
 
 :root {
-  /* Default Light Mode (Soft & Airy) */
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --primary: #6366f1; /* Indigo */
-  --primary-foreground: #ffffff;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --border: #e2e8f0;
-  --accent: #e0e7ff;
-  --card: rgba(255, 255, 255, 0.7);
-  --destructive: #ef4444;
+  /* Atelier Zero Paper System */
+  --background: #F9F8F6;        /* warm paper */
+  --foreground: #181716;        /* deep ink */
+  --primary: #E03E00;           /* coral accent */
+  --primary-foreground: #FEFDFB;
+  --muted: #F0EDEA;             /* paper shadow */
+  --muted-foreground: #706E6B;  /* caption gray */
+  --border: rgba(24, 23, 22, 0.12); /* hairline */
+  --accent: #F5F2EF;            /* warm surface */
+  --card: #FEFDFB;              /* card paper */
+  --destructive: #C23616;       /* muted red */
   
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --card-foreground: #0f172a;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --accent-foreground: #4f46e5;
-  --ring: #6366f1;
-  --input: #e2e8f0;
+  /* Additional tokens needed by shadcn */
+  --popover: #FEFDFB;
+  --popover-foreground: #181716;
+  --card-foreground: #181716;
+  --secondary: #F0EDEA;
+  --secondary-foreground: #181716;
+  --accent-foreground: #181716;
+  --ring: #E03E00;
+  --input: rgba(24, 23, 22, 0.12);
 
-  --radius: 1rem;
+  --radius: 0;
 }
 
 .dark {
-  /* Dark Mode (Sleek AI-Themed Glass) */
-  --background: #09090b;
-  --foreground: #f8fafc;
-  --primary: #8b5cf6; /* Vibrant Purple */
-  --primary-foreground: #ffffff;
-  --muted: rgba(255, 255, 255, 0.05);
-  --muted-foreground: #94a3b8;
-  --border: rgba(255, 255, 255, 0.1);
-  --accent: rgba(139, 92, 246, 0.15);
-  --card: rgba(15, 23, 42, 0.4);
-  --destructive: #f87171;
+  /* Dark paper adaptation */
+  --background: #121110;
+  --foreground: #FAF8F5;
+  --primary: #FF4500;
+  --primary-foreground: #121110;
+  --muted: #1F1D1B;
+  --muted-foreground: #A19D98;
+  --border: rgba(250, 248, 245, 0.12);
+  --accent: #1A1817;
+  --card: #161514;
+  --destructive: #E74C3C;
   
-  --popover: rgba(15, 23, 42, 0.6);
-  --popover-foreground: #f8fafc;
-  --card-foreground: #f8fafc;
-  --secondary: rgba(255, 255, 255, 0.05);
-  --secondary-foreground: #f8fafc;
-  --accent-foreground: #c4b5fd;
-  --ring: #8b5cf6;
-  --input: rgba(255, 255, 255, 0.1);
+  --popover: #161514;
+  --popover-foreground: #FAF8F5;
+  --card-foreground: #FAF8F5;
+  --secondary: #1F1D1B;
+  --secondary-foreground: #FAF8F5;
+  --accent-foreground: #FAF8F5;
+  --ring: #FF4500;
+  --input: rgba(250, 248, 245, 0.15);
 }
 
 @layer base {
@@ -104,97 +110,147 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/30;
+    @apply bg-background text-foreground;
   }
   html {
     @apply font-sans;
   }
 }
 
-/* ─── Typography & Effects ─── */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to right, var(--primary), #3b82f6); /* Purple to Blue */
+/* ─── Atelier Zero Typography ─── */
+.font-editorial {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  letter-spacing: -0.01em;
 }
 
-/* ─── Glassmorphism System ─── */
-.glass-panel {
-  background: var(--card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+.text-emphasis {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.coral-dot::after {
+  content: ".";
+  color: var(--primary);
+  font-family: var(--font-sans);
+}
+
+.font-display-xl {
+  font-family: var(--font-serif);
+  font-size: 56px;
+  line-height: 1.07;
+  letter-spacing: -0.02em;
+}
+
+.font-display-lg {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.font-display-lg-mobile {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: 1.13;
+  letter-spacing: -0.01em;
+}
+
+.font-display-md {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  line-height: 1.10;
+  letter-spacing: -0.01em;
+}
+
+.font-headline-md {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.17;
+  letter-spacing: -0.01em;
+}
+
+.font-body-base {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.font-body-sm {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.font-data-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.font-label-caps {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.33;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ─── Atelier Zero Specific Utilities ─── */
+@utility bg-paper { background-color: var(--background); }
+@utility text-ink { color: var(--foreground); }
+@utility text-coral { color: var(--primary); }
+@utility bg-coral { background-color: var(--primary); }
+@utility border-hairline { border: 1px solid var(--border); }
+@utility border-dotted { border-style: dotted; }
+@utility border-dotted-b { border-bottom-style: dotted; border-bottom-width: 1px; border-bottom-color: rgba(24, 23, 22, 0.25); }
+
+.dark-slab {
+  background-color: #121110;
+  color: #FAF8F5;
+}
+
+.dark-slab .border-border {
+  border-color: rgba(250, 248, 245, 0.15);
+}
+
+.dark-slab .border-dotted-b {
+  border-bottom-color: rgba(250, 248, 245, 0.25);
+}
+
+.editorial-card {
+  background-color: var(--card);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-glass);
-  border-radius: var(--radius-xl);
+  border-radius: 0;
+  box-shadow: var(--shadow-paper);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.glass-card {
-  background: var(--card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.editorial-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-paper-hover);
+}
+
+.paper-surface {
+  background-color: var(--accent);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.glass-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-glow);
-  border-color: rgba(139, 92, 246, 0.4); /* Glow border on hover */
-}
-
-/* ─── Micro-Animations ─── */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
-  70% { box-shadow: 0 0 0 15px rgba(139, 92, 246, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s infinite;
-}
-
-/* ─── Animated Mesh Background ─── */
-.mesh-bg {
-  position: relative;
-  overflow: hidden;
-  z-index: 0;
-}
-.mesh-bg::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
-              radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%);
-  animation: rotate-mesh 20s linear infinite;
-  z-index: -1;
-  pointer-events: none;
-}
-
-@keyframes rotate-mesh {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 /* ─── Scroll-Reveal Animation ─── */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(24px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -203,16 +259,56 @@
   transform: translateY(0);
 }
 
-/* ─── Backward compatibility aliases ─── */
-.editorial-card { @apply glass-card; }
-.bento-glass { @apply glass-panel; }
-.bento-glass-hover { @apply hover:-translate-y-1 hover:shadow-[var(--shadow-glow)]; }
-.bg-paper { @apply bg-background; }
-.text-ink { @apply text-foreground; }
-.border-hairline { border: 1px solid var(--border); }
-.border-dotted-b { border-bottom: 1px dashed var(--border); }
-.nav-headroom { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-.nav-headroom--hidden { transform: translateY(-100%); }
+/* ─── Headroom Nav ─── */
+.nav-headroom { 
+  transform: translateY(0); 
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+.nav-headroom--hidden { 
+  transform: translateY(-100%); 
+}
+
+/* ─── Backward compatibility aliases for existing classes to avoid complete breakage immediately ─── */
+.glass-premium, .glass-card, .bento-glass {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: var(--shadow-paper);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-premium-hover, .glass-hover, .bento-glass-hover {
+  /* Let .editorial-card handle hover */
+}
+
+.gradient-cta-primary, .gradient-cta-accent, .gradient-cta-hero {
+  @apply bg-primary text-primary-foreground;
+  transition: all 0.2s ease;
+}
+.gradient-cta-primary:hover, .gradient-cta-accent:hover, .gradient-cta-hero:hover {
+  opacity: 0.9;
+}
+
+.animated-gradient-hero, .animated-gradient-surface, .animated-gradient-mesh, .animated-gradient-edu {
+  background-color: var(--background);
+}
+
+.shadow-premium, .shadow-card, .shadow-elevated {
+  box-shadow: var(--shadow-paper);
+}
+
+.bg-surface, .bg-surface-low, .bg-surface-warm {
+  background-color: var(--background);
+}
+
+.bg-brand-emerald, .bg-brand-emerald-light, .bg-brand-sky {
+  @apply bg-primary text-primary-foreground;
+}
+
+.text-brand-emerald, .text-brand-emerald-light, .text-brand-sky, .text-verified {
+  @apply text-primary;
+}
+.bg-verified { @apply bg-primary text-primary-foreground; }
 
 .bento-grid {
   display: grid;
@@ -237,47 +333,11 @@
   .bento-span-2, .bento-span-large { grid-column: span 1; grid-row: span 1; }
 }
 
-.text-emphasis {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 500;
-  @apply text-primary;
-}
-
-.coral-dot::after {
-  content: ".";
-  @apply text-primary;
-  font-family: var(--font-sans);
-}
-
-.font-display-xl {
-  font-family: var(--font-sans);
-  font-size: 56px;
-  line-height: 1.07;
-  letter-spacing: -0.02em;
-  font-weight: 700;
-}
-
-.font-display-lg {
-  font-family: var(--font-sans);
-  font-size: 48px;
-  line-height: 1.08;
-  letter-spacing: -0.015em;
-  font-weight: 700;
-}
-
-.font-display-lg-mobile {
-  font-family: var(--font-sans);
-  font-size: 32px;
-  line-height: 1.13;
-  letter-spacing: -0.01em;
-  font-weight: 700;
-}
-
-.font-display-md {
-  font-family: var(--font-sans);
-  font-size: 40px;
-  line-height: 1.10;
-  letter-spacing: -0.01em;
-  font-weight: 600;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
