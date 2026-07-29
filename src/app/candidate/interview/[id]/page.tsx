@@ -1,7 +1,6 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth-options";
 import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
+import { getCurrentUser, hasRole } from "@/lib/rbac";
 import { InterviewInterface } from "@/components/interview-interface";
 import { InterviewTranscript } from "@/types";
 import { InterviewPageClient } from "./interview-page-client";
@@ -17,15 +16,15 @@ interface PageProps {
 
 export default async function InterviewPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const session = await getServerSession(authOptions);
+  const user = await getCurrentUser();
 
-  if (!session || !session.user || session.user.role !== "CANDIDATE") {
+  if (!user || !hasRole(user, ["CANDIDATE"])) {
     redirect("/login");
   }
 
   // Find the candidate profile first
   const candidateProfile = await prisma.candidateProfile.findUnique({
-    where: { userId: session.user.id },
+    where: { userId: user.id },
   });
 
   if (!candidateProfile) {

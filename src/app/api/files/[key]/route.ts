@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth-options";
 import { prisma } from "@/lib/db";
+import { hasRole } from "@/lib/rbac";
 import { promises as fsPromises } from "fs";
 import path from "path";
 
@@ -20,11 +21,10 @@ export async function GET(
       return NextResponse.json({ error: "مسار ملف غير صالح." }, { status: 400 });
     }
 
-    const userRole = session.user.role;
     const userId = session.user.id;
 
     // Check permissions — use exact match on filename suffix (not loose contains)
-    const isAdmin = ["HR_ADMIN", "TECH_ADMIN", "SYSTEM_ADMIN"].includes(userRole);
+    const isAdmin = hasRole(session.user, ["HR_ADMIN", "TECH_ADMIN", "SYSTEM_ADMIN"]);
     if (!isAdmin) {
       const resume = await prisma.resume.findFirst({
         where: {

@@ -1,7 +1,6 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth-options";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
+import { getCurrentUser, hasRole } from "@/lib/rbac";
 import { SystemSettingsClient } from "./system-settings-client";
 import { SystemPageClient } from "./system-page-client";
 import { Building2, Users, BrainCircuit, Settings, Server } from "lucide-react";
@@ -10,9 +9,9 @@ import { StatCard } from "@/components/ui/stat-card";
 export const dynamic = "force-dynamic";
 
 export default async function SystemAdminDashboard() {
-  const session = await getServerSession(authOptions);
+  const user = await getCurrentUser();
 
-  if (!session || !session.user || session.user.role !== "SYSTEM_ADMIN") {
+  if (!user || !hasRole(user, ["SYSTEM_ADMIN"])) {
     redirect("/login");
   }
 
@@ -49,7 +48,7 @@ export default async function SystemAdminDashboard() {
   const initialSettings: Record<string, string> = {};
   for (const s of dbSettings) initialSettings[s.key] = s.value;
 
-  const userName = session.user.name || session.user.email || "";
+  const userName = user.name || user.email || "";
 
   const totalCompanies = companies.length;
   const totalUsers = users.length;

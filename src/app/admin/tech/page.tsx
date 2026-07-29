@@ -1,13 +1,12 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth-options";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
+import { getCurrentUser, hasRole } from "@/lib/rbac";
 import Link from "next/link";
 import { CodeTelemetryViewer } from "@/components/code-telemetry-viewer";
 import { TechPageClient } from "./tech-page-client";
 import { EmptyState } from "@/components/empty-state";
 import { StatCard } from "@/components/ui/stat-card";
-import { Cpu, BarChart3, Code2, Users, Activity } from "lucide-react";
+import { Cpu, BarChart3, Code2, Users, Activity, Terminal } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -19,9 +18,9 @@ interface PageProps {
 
 export default async function TechAdminDashboard({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
-  const session = await getServerSession(authOptions);
+  const user = await getCurrentUser();
 
-  if (!session || !session.user || (session.user.role !== "TECH_ADMIN" && session.user.role !== "SYSTEM_ADMIN")) {
+  if (!user || !hasRole(user, ["TECH_ADMIN", "SYSTEM_ADMIN"])) {
     redirect("/login");
   }
 
@@ -53,7 +52,7 @@ export default async function TechAdminDashboard({ searchParams }: PageProps) {
   const activeAssessment = activeSession?.assessments[0];
   const scores = activeAssessment?.scores || [];
 
-  const userName = session.user.name || session.user.email || "";
+  const userName = user.name || user.email || "";
 
   const totalEvaluated = applications.length;
   const avgScore = totalEvaluated > 0
@@ -177,5 +176,4 @@ export default async function TechAdminDashboard({ searchParams }: PageProps) {
   );
 }
 
-// Ensure Terminal icon is imported
-import { Terminal } from "lucide-react";
+

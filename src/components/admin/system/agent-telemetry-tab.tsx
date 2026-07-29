@@ -17,7 +17,10 @@ export function AgentTelemetryTab({ auditLogs }: AgentTelemetryTabProps) {
       </div>
 
       <div className="border-2 border-border bg-ink text-paper font-mono text-sm p-6 h-96 overflow-y-auto space-y-3 shadow-[4px_4px_0px_0px_rgba(20,20,20,1)] transition-all duration-300">
-        {auditLogs.map((log, idx) => (
+        {(auditLogs ?? []).length === 0 && (
+          <p className="text-center text-sm text-muted-foreground py-4">لم يتم تسجيل أي أحداث بعد.</p>
+        )}
+        {(auditLogs ?? []).map((log, idx) => (
           <div key={idx} className="leading-relaxed animate-fade-in border-b-2 border-dotted border-paper/20 pb-2">
             <span className="text-coral font-bold mr-2">[{log.includes("FAILED") || log.includes("Error") ? "ERROR" : "AUDIT"}]</span> {log}
           </div>

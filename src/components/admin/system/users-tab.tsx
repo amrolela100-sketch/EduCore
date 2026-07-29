@@ -80,6 +80,9 @@ export function UsersTab({ initialUsers, onLogAudit }: UsersTabProps) {
             </tr>
           </thead>
           <tbody className="divide-y-2 divide-dotted divide-border">
+            {filteredUsers.length === 0 && (
+              <tr><td colSpan={5} className="text-center py-8 text-muted-foreground">لا يوجد مستخدمون مطابقون للبحث.</td></tr>
+            )}
             {filteredUsers.map((u) => {
               const isRevoked = !!revokedUsers[u.id];
               let roleBadgeColor = "bg-gray-50 border-gray-400 text-gray-700";

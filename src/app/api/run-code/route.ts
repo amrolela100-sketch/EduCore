@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth-options";
 import { checkRateLimit, getClientIp, createRateLimitResponse } from "@/lib/rate-limit";
 import { executeSandboxedCode } from "@/lib/eval-wrapper";
+import { createSafeError } from "@/lib/errors";
 
 export async function POST(request: Request) {
   try {
@@ -27,12 +28,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json(evalResult, { status: evalResult.success ? 200 : 400 });
   } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : "خطأ غير معروف في تنفيذ الكود";
     console.error("[SANDBOX CODE EXECUTION ROUTE ERROR]:", err);
-    return NextResponse.json({
-      success: false,
-      error: errorMessage,
-      logs: [`[RUNTIME ERROR]: ${errorMessage}`],
-    }, { status: 500 });
+    const safeErr = createSafeError(err, "run-code", "حدث خطأ أثناء تنفيذ الكود.");
+    return NextResponse.json(safeErr, { status: 500 });
   }
 }

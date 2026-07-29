@@ -1,0 +1,248 @@
+import { Language } from "@/components/language-context";
+
+export const translations: Record<Language, Record<string, string>> = {
+  ar: {
+    // Navigation
+    appName: "إديوكور هب",
+    appSub: "محرك التوظيف التلقائي الذكي",
+    methodology: "المنهجية والأدلة",
+    pipeline: "معمارية المحرك",
+    openRoles: "الوظائف المتاحة",
+    signIn: "تسجيل الدخول",
+    getStarted: "ابدأ الآن",
+    logout: "تسجيل الخروج",
+    backToHome: "العودة للرئيسية",
+    hrWorkspace: "لوحة تفتيش HR",
+    auditor: "المدقق المسجل",
+
+    // Hero Section
+    heroBadge: "توظيف شفاف ومحمي بمراجعة بشرية مؤكدة",
+    heroTitleLine1: "نهاية عصر القرارات الغامضة",
+    heroTitleHighlight: "والتوظيف المظلِم.",
+    heroDesc: "نستخدم تقييمات تفاعلية محددة لاكتشاف أفضل الكفاءات. تضمن المراجعة البشرية الكاملة أن كل توصية توظيف مدعومة بسجل تدقيق موثوق ومفصل.",
+    candidatesAndHr: "للمرشحين ومسؤولي التوظيف",
+    exploreArchitecture: "استكشف معمارية النظام",
+    metric1Val: "+1,042k",
+    metric1Label: "مرشح تم تقييمه",
+    metric2Val: "99.8%",
+    metric2Label: "دقة التفتيش والتدقيق",
+    metric3Val: "0%",
+    metric3Label: "هلوسة أو انحياز تلقائي",
+
+    // Methodology
+    methodologyTag: "المبادئ التحريرية والكفاءة الحقيقية",
+    methodologyTitle: "صُمم لإبراز القدرات البشرية الحقيقية",
+    methodologyDesc: "عكس الأدوات التلقائية العشوائية التي تولد درجات وهمية، يركز نظامنا على التقييم البشري الحقيقي واختبارات المهارات المحمية.",
+    card1Badge: "01. كفاءات حقيقية",
+    card1Title: "تحليل ملفات قائم على الحقائق",
+    card1Desc: "استخراج الأكواد الفعلية، مستودعات البرمجة، والخبرات الحقيقية بدون حشو أو تزييف.",
+    card2Badge: "02. بيئة تجربة محصنة",
+    card2Title: "حل المشكلات في بيئة معزولة Sandbox",
+    card2Desc: "يظهر المرشحون مهاراتهم الحقيقية في بيئات تفاعلية مع تسجِيل كامل بدون انحياز آلي.",
+    card3Badge: "03. قابلية التفتيش الكلية",
+    card3Title: "مراجعات وتعديلات بشرية مسجلة",
+    card3Desc: "توفر كل خطوة تقييم مبرراً رياضياً منطقياً، مما يتيح لمدراء التوظيف المراجعة والتعديل في أي لحظة.",
+
+    // Pipeline
+    pipelineTag: "معمارية النظام v2.4",
+    pipelineTitle: "مسار التقييم التفاعلي الذكي",
+    pipelinePrompt: "اضغط على أي مرحلة لاستكشاف آلية التقييم والتفتيش",
+
+    // Jobs Section
+    jobsTag: "فرص موثوقة ومفحوصة",
+    jobsTitle: "استكشف الوظائف الشاغرة المفتوحة",
+    searchPlaceholder: "ابحث عن وظيفة أو شركة أو موقع...",
+    noJobsFound: "لم يتم العثور على وظائف تطابق بحثك.",
+    applyNow: "قدّم الآن",
+    competitiveSalary: "راتب تنافسي",
+    remoteHybrid: "عن بُعد / هجين",
+
+    // Login Page
+    accessSystem: "تسجيل الدخول للنظام",
+    registerFile: "إنشاء حساب مرشح جديد",
+    securePortal: "بوابة الاعتماد الآمنة",
+    openNewProfile: "إنشاء ملف جديد للمرشح",
+    loginBtn: "دخول",
+    signUpBtn: "تسجيل جديد",
+    fullName: "الاسم الكامل",
+    fullNamePlaceholder: "أدخل اسمك الكامل",
+    emailAddr: "البريد الإلكتروني",
+    emailPlaceholder: "example@domain.com",
+    password: "كلمة المرور",
+    passwordPlaceholder: "••••••••",
+    authorize: "تسجيل الدخول",
+    createProfile: "إنشاء الحساب",
+    processing: "جاري المعالجة...",
+
+    // Candidate Dashboard
+    welcomeCandidate: "مرحباً بك في لوحة المرشح",
+    candidateSubtitle: "قم برفع سيرتك الذاتية وتحديث مهاراتك والتقديم على أفضل الوظائف المناسبة لك.",
+    uploadResume: "رفع السيرة الذاتية (PDF / Word)",
+    extractedSkills: "المهارات المستخرجة والمؤكدة",
+    appliedJobs: "الوظائف المتقدم عليها",
+    noApplications: "لم تقم بالتقديم على أي وظيفة بعد.",
+    statusSubmitted: "تم تقديم الطلب",
+    statusInterviewing: "جاري المقابلة والتقييم",
+    statusAccepted: "مقبول مبدئياً",
+    statusRejected: "لم يتم القبول",
+
+    // HR Admin Dashboard
+    hrTitle: "إدارة التوظيف وتفتيش التقييمات",
+    hrDesc: "تراجع هذه اللوحة المرشحين المتقدمين عبر الوكلاء الذكاء الاصطناعي مع إمكانية تسجيل القرارات البشرية ونشر وظائف جديدة.",
+    createJobBtn: "+ إضافة وظيفة جديدة",
+    candidateName: "اسم المرشح",
+    appliedFor: "الوظيفة المتقدم لها",
+    matchScore: "نسبة التطابق",
+    evaluationStatus: "حالة التقييم",
+    actionHeader: "القرار والتعديل البشري",
+    acceptCandidate: "قبول المرشح",
+    rejectCandidate: "رفض الطلب",
+    justificationPlaceholder: "اكتب تبريراً منطقياً لقرارك لتسجيله في سجل التدقيق الحصين...",
+    submitDecision: "تسجيل القرار فوراً",
+
+    // Footer
+    footerRights: "© 2026 إديوكور هب. أنظمة التوظيف الشفافة والمحمية.",
+    systemsOperational: "جميع الأنظمة تعمل بكفاءة عالية",
+
+    // Error Messages
+    errorResumeTooLarge: "حجم الملف يتجاوز الحد المسموح (10MB)",
+    errorTryAgain: "حدث خطأ. يرجى المحاولة مرة أخرى",
+    buttonRetry: "إعادة المحاولة",
+
+    // Candidate Page
+    profileNotFound: "لم يتم العثور على ملف تعريف المرشح.",
+    profileNotFoundDesc: "يرجى تسجيل الدخول بحساب مرشح صالح أو التنسيق مع إدارة التوظيف.",
+    backToLogin: "العودة لتسجيل الدخول",
+    noResumeUpload: "قم برفع سيرتك الذاتية لتحديث مهاراتك تلقائياً...",
+    activeApplications: "طلبات التوظيف النشطة والجلسات البرمجية",
+    noApplicationsYet: "لم تتقدم لأي وظيفة بعد. تصفح الوظائف الشاغرة أدناه للتقديم الفوري.",
+    interviewEntry: "دخول المقابلة البرمجية",
+    awaitingEnvironment: "بانتظار تجهيز البيئة",
+    availableJobs: "الوظائف الشاغرة المتاحة للتقديم",
+    noNewJobs: "لا توجد وظائف شاغرة جديدة متوافقةالياً.",
+    candidate: "المرشح",
+    matchRatio: "نسبة المطابقة:",
+  },
+  en: {
+    // Navigation
+    appName: "EduCore Hub",
+    appSub: "Autonomous Recruitment Engine",
+    methodology: "Methodology",
+    pipeline: "Pipeline Architecture",
+    openRoles: "Open Roles",
+    signIn: "Sign In",
+    getStarted: "Get Started",
+    logout: "Sign Out",
+    backToHome: "Back to Home",
+    hrWorkspace: "HR Audit Workspace",
+    auditor: "Logged Auditor",
+
+    // Hero Section
+    heroBadge: "Auditable Human-in-the-Loop Recruiting",
+    heroTitleLine1: "The End of the",
+    heroTitleHighlight: "Black-Box Hire.",
+    heroDesc: "We deploy transparent, deterministic evaluations to discover top talent. Total human reviewability ensures every hiring recommendation is backed by a verifiable, auditable trail.",
+    candidatesAndHr: "For Candidates & HR",
+    exploreArchitecture: "Explore Architecture",
+    metric1Val: "1,042k+",
+    metric1Label: "Evaluated Candidates",
+    metric2Val: "99.8%",
+    metric2Label: "Audit Verifiability",
+    metric3Val: "0%",
+    metric3Label: "Black-Box Hallucination",
+
+    // Methodology
+    methodologyTag: "Editorial Principles & Real Talent",
+    methodologyTitle: "Built for Authentic Human Potential",
+    methodologyDesc: "Unlike generic AI tools that hallucinate synthetic scores, our platform focuses on authentic human assessment and deterministic skill verifications.",
+    card1Badge: "01. Real Talent",
+    card1Title: "Human-Centric Data Parsing",
+    card1Desc: "Extracting actual code samples, verifiable repository commits, and true project experience without artificial fluff.",
+    card2Badge: "02. Objective Sandboxes",
+    card2Title: "Sandboxed Problem Solving",
+    card2Desc: "Candidates demonstrate their real capabilities in interactive sandboxes with full telemetry and zero automated bias.",
+    card3Badge: "03. Full Reviewability",
+    card3Title: "HR Review & Audit Overrides",
+    card3Desc: "Every decision step provides a mathematical rationale, allowing human hiring managers to review or override instantly.",
+
+    // Pipeline
+    pipelineTag: "System Architecture v2.4",
+    pipelineTitle: "Interactive Evaluation Pipeline",
+    pipelinePrompt: "Click any stage below to inspect the evaluation process",
+
+    // Jobs Section
+    jobsTag: "Audited Opportunities",
+    jobsTitle: "Explore Verified Open Positions",
+    searchPlaceholder: "Search position or company...",
+    noJobsFound: "No matching positions found.",
+    applyNow: "Apply Now",
+    competitiveSalary: "Competitive Salary",
+    remoteHybrid: "Remote / Hybrid",
+
+    // Login Page
+    accessSystem: "Access System",
+    registerFile: "Register File",
+    securePortal: "Secure credentials portal",
+    openNewProfile: "Open new candidate profile",
+    loginBtn: "Login",
+    signUpBtn: "Sign Up",
+    fullName: "Full Name",
+    fullNamePlaceholder: "Enter your full name",
+    emailAddr: "Email Address",
+    emailPlaceholder: "example@domain.com",
+    password: "Password",
+    passwordPlaceholder: "••••••••",
+    authorize: "Authorize",
+    createProfile: "Create Profile",
+    processing: "Processing...",
+
+    // Candidate Dashboard
+    welcomeCandidate: "Welcome to Candidate Workspace",
+    candidateSubtitle: "Upload your resume, update your technical skills, and apply directly to matching roles.",
+    uploadResume: "Upload Resume (PDF / Word)",
+    extractedSkills: "Extracted Verified Skills",
+    appliedJobs: "Applied Job Postings",
+    noApplications: "You haven't applied to any job postings yet.",
+    statusSubmitted: "Application Submitted",
+    statusInterviewing: "Interview & Evaluation",
+    statusAccepted: "Provisionally Accepted",
+    statusRejected: "Not Shortlisted",
+
+    // HR Admin Dashboard
+    hrTitle: "Talent Alignment & Job Management",
+    hrDesc: "Review candidate pipelines matched through autonomous agents, or post new verified job opportunities directly to the recruitment engine.",
+    createJobBtn: "+ Add New Job Posting",
+    candidateName: "Candidate Name",
+    appliedFor: "Applied Position",
+    matchScore: "Match Score",
+    evaluationStatus: "Evaluation Status",
+    actionHeader: "Human Decision & Override",
+    acceptCandidate: "Accept Candidate",
+    rejectCandidate: "Reject Application",
+    justificationPlaceholder: "Provide audit justification for your decision...",
+    submitDecision: "Submit HR Decision",
+
+    // Footer
+    footerRights: "© 2026 EduCore Hub. Auditable Talent Evaluation Systems.",
+    systemsOperational: "All Systems Operational",
+
+    // Error Messages
+    errorResumeTooLarge: "File size exceeds the limit (10MB)",
+    errorTryAgain: "An error occurred. Please try again",
+    buttonRetry: "Retry",
+
+    // Candidate Page
+    profileNotFound: "Candidate profile not found.",
+    profileNotFoundDesc: "Please sign in with a valid candidate account or coordinate with HR.",
+    backToLogin: "Back to Login",
+    noResumeUpload: "Upload your resume to auto-update your skills...",
+    activeApplications: "Active Applications & Coding Sessions",
+    noApplicationsYet: "You haven't applied to any position yet. Browse openings below to apply instantly.",
+    interviewEntry: "Enter Interview Session",
+    awaitingEnvironment: "Awaiting environment setup",
+    availableJobs: "Available Jobs for Application",
+    noNewJobs: "No new matching positions available.",
+    candidate: "Candidate",
+    matchRatio: "Match Ratio:",
+  },
+};

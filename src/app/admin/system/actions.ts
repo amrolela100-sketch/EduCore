@@ -211,7 +211,7 @@ export async function saveAgentSettings(settings: Record<string, string>): Promi
   }
 }
 
-export async function testApiProviderConnection(providerId: string): Promise<{ success: boolean; message: string; latencyMs?: number }> {
+export async function testApiProviderConnection(providerId: string): Promise<SafeResult> {
   try {
     await checkAuth();
 
@@ -220,24 +220,24 @@ export async function testApiProviderConnection(providerId: string): Promise<{ s
     });
 
     if (!provider) {
-      return { success: false, message: "لم يتم العثور على المزود المطلوب." };
+      return createSafeError(null, "System Admin Action - testApiProviderConnection", "لم يتم العثور على المزود المطلوب.");
     }
 
     if (!provider.encryptedKey) {
-      return { success: false, message: "لم يتم تعيين مفتاح API لهذا المزود بعد. أدخل المفتاح واضغط حفظ أولاً." };
+      return createSafeError(null, "System Admin Action - testApiProviderConnection", "لم يتم تعيين مفتاح API لهذا المزود بعد. أدخل المفتاح واضغط حفظ أولاً.");
     }
 
     if (provider.baseUrl) {
       const urlCheck = await validateExternalUrl(provider.baseUrl);
       if (!urlCheck.valid) {
-        return { success: false, message: urlCheck.error || "رابط الـ API الخاص بالمزود غير صالح للأمان." };
+        return createSafeError(null, "SSRF Check", urlCheck.error || "رابط الـ API الخاص بالمزود غير صالح للأمان.");
       }
     }
 
     const apiKey = decryptKey(provider.encryptedKey);
 
     if (!apiKey) {
-      return { success: false, message: "فشل فك تشفير المفتاح. قد يكون المفتاح مفقوداً أو غير صالح." };
+      return createSafeError(null, "System Admin Action - testApiProviderConnection", "فشل فك تشفير المفتاح. قد يكون المفتاح مفقوداً أو غير صالح.");
     }
 
     const startTime = Date.now();
@@ -297,22 +297,13 @@ export async function testApiProviderConnection(providerId: string): Promise<{ s
 
     if (isOk) {
       return {
-        success: true,
-        latencyMs,
-        message: `تم الاتصال بمزود ${provider.name} بنجاح! زمن الاستجابة: ${latencyMs}ms.`,
+        ...createSafeResult({ latencyMs }, `تم الاتصال بمزود ${provider.name} بنجاح! زمن الاستجابة: ${latencyMs}ms.`),
       };
     } else {
-      return {
-        success: false,
-        message: `فشل الاتصال بـ ${provider.name}: ${statusText || "مفتاح غير صالح أو مرفوض من الخادم."}`,
-      };
+      return createSafeError(null, "System Admin Action - testApiProviderConnection", `فشل الاتصال بـ ${provider.name}: ${statusText || "مفتاح غير صالح أو مرفوض من الخادم."}`);
     }
   } catch (error: unknown) {
-    console.error("[TEST API PROVIDER CONNECTION ERROR]:", error);
-    return {
-      success: false,
-      message: "حدث خطأ غير متوقع أثناء اختبار الاتصال بمزود الخدمة. يرجى المحاولة لاحقاً.",
-    };
+    return createSafeError(error, "System Admin Action - testApiProviderConnection", "حدث خطأ غير متوقع أثناء اختبار الاتصال بمزود الخدمة. يرجى المحاولة لاحقاً.");
   }
 
 }

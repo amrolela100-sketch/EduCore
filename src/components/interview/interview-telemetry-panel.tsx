@@ -50,7 +50,7 @@ export function InterviewTelemetryPanel({
         <div className="space-y-3 text-sm">
           <span className="font-label-caps font-bold text-ink block border-b-2 border-border pb-2 inline-block">الأسئلة التقنية المطلوبة:</span>
           <div className="space-y-3">
-            {questions.map((q, idx) => (
+            {(questions ?? []).map((q, idx) => (
               <div key={idx} className="p-4 bg-paper border-2 border-border shadow-[2px_2px_0px_0px_rgba(20,20,20,1)] flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-coral flex-shrink-0 mt-0.5" />
                 <span className="font-body-sm text-ink/80 leading-relaxed">{q}</span>

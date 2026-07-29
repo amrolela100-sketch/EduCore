@@ -190,13 +190,13 @@ export default async function CandidateDashboard() {
                             <div className="text-xs text-ink/50 mt-0.5">{app?.jobPosting?.company?.name}</div>
                           </td>
                           <td className="py-4 px-5">
-                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${app.status === 'ACCEPTED' ? 'bg-green-100 text-green-700' : app.status === 'REJECTED' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'}`}>
-                              {app.status}
+                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${app?.status === 'ACCEPTED' ? 'bg-green-100 text-green-700' : app?.status === 'REJECTED' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'}`}>
+                              {app?.status ?? "APPLIED"}
                             </span>
                           </td>
                           <td className="py-4 px-5 text-right">
                             {sess ? (
-                              <Link href={`/candidate/interview/${sess.id}`} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-ink text-white rounded-md text-xs font-medium hover:bg-coral transition-colors">
+                              <Link href={`/candidate/interview/${sess?.id}`} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-ink text-white rounded-md text-xs font-medium hover:bg-coral transition-colors">
                                 <Cpu className="w-3.5 h-3.5" /> Start Interview
                               </Link>
                             ) : (

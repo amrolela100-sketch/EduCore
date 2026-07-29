@@ -145,6 +145,9 @@ export function CompaniesTab({ initialCompanies, onLogAudit }: CompaniesTabProps
             </tr>
           </thead>
           <tbody className="divide-y-2 divide-dotted divide-border">
+            {filteredCompanies.length === 0 && (
+              <tr><td colSpan={5} className="text-center py-8 text-muted-foreground">لا توجد مؤسسات مطابقة للبحث.</td></tr>
+            )}
             {filteredCompanies.map((c) => {
               const isSuspended = !!suspendedCompanies[c.id];
               return (
