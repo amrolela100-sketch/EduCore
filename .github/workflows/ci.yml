@@ -46,5 +46,5 @@ jobs:
           DIRECT_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
           NEXTAUTH_URL: "http://localhost:3000"
           NEXTAUTH_SECRET: "dummy-secret-key-32-chars-minimum"
-          ENCRYPTION_SECRET: "dummy-encryption-secret-key-hex"
-          GOOGLE_GENERATIVE_AI_API_KEY: "dummy-gemini-key"
+          ENCRYPTION_KEY: "dummy-encryption-secret-key-hex"
+          GEMINI_API_KEY: "dummy-gemini-key"
