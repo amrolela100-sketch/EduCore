@@ -131,7 +131,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${interTight.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable} h-full antialiased light`} style={{ colorScheme: "light" }}>
+    <html lang="ar" dir="rtl" className={`${cairo.variable} ${interTight.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable} h-full antialiased dark`} style={{ colorScheme: "dark" }}>
       <head>
         <meta name="geo.region" content="SA" />
         <meta name="geo.placename" content="Riyadh, Saudi Arabia" />
@@ -139,7 +139,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="ICBM" content="24.7, 46.68" />
         <meta name="geo.country" content="SA" />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-paper text-ink">
+      <body className="min-h-full flex flex-col font-sans">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }} />
         <Providers>

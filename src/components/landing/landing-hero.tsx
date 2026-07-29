@@ -65,30 +65,26 @@ export function LandingHero({ language }: LandingHeroProps) {
   return (
     <section
       data-od-id="landing-hero"
-      className="relative overflow-hidden border-b border-ledger"
+      className="relative overflow-hidden min-h-[90vh] flex items-center justify-center"
     >
-      {/* ── Paper texture background ── */}
-      <div className="absolute inset-0 bg-paper pointer-events-none" />
-      <div className="absolute inset-0 pattern-dots pointer-events-none opacity-[0.03]" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-14 sm:py-24 flex flex-col items-center text-center space-y-10">
         {/* ── Investor chips ── */}
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-2"
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-wrap items-center justify-center gap-3"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 font-label-caps border border-border bg-paper text-ink shadow-[2px_2px_0px_0px_rgba(20,20,20,1)]">
-            <Building2 className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 font-label-caps text-xs rounded-full glass-card border-primary/20 text-foreground animate-float" style={{ animationDelay: "0s" }}>
+            <Building2 className="w-3.5 h-3.5 text-primary" />
             <span>{isArabic ? "للاستثمار" : "For Investors"}</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 font-label-caps border border-border bg-paper text-ink shadow-[2px_2px_0px_0px_rgba(20,20,20,1)]">
-            <TrendingUp className="w-3.5 h-3.5 text-coral" />
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 font-label-caps text-xs rounded-full glass-card border-primary/20 text-foreground animate-float" style={{ animationDelay: "0.5s" }}>
+            <TrendingUp className="w-3.5 h-3.5 text-primary" />
             <span>{isArabic ? "سوق 48 مليار دولار" : "$48B Market"}</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 font-label-caps border border-ink bg-ink text-paper shadow-[2px_2px_0px_0px_rgba(224,62,0,1)]">
-            <Sparkles className="w-3.5 h-3.5 text-coral" />
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 font-label-caps text-xs rounded-full bg-primary/10 text-primary border border-primary/30 shadow-[0_0_15px_rgba(139,92,246,0.3)] animate-float" style={{ animationDelay: "1s" }}>
+            <Sparkles className="w-3.5 h-3.5" />
             <span>
               {isArabic ? "قابل للتوسع عالمياً" : "Globally Scalable"}
             </span>
@@ -97,53 +93,25 @@ export function LandingHero({ language }: LandingHeroProps) {
 
         {/* ── Headline ── */}
         <motion.h1
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.55 }}
-          className="font-editorial text-5xl sm:text-7xl text-ink max-w-4xl"
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="font-display-xl max-w-5xl"
           dir={isArabic ? "rtl" : "ltr"}
         >
           {isArabic ? (
             <>
               توظيف مبني على{" "}
-              <span className="text-coral italic relative inline-block">
-                القياسات الفنية الحقيقية
-                <svg
-                  className="absolute -bottom-1 left-0 w-full"
-                  height="6"
-                  viewBox="0 0 200 6"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 5 Q 100 0 200 5"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                    opacity="0.35"
-                  />
-                </svg>
+              <span className="text-gradient relative inline-block">
+                الذكاء الاصطناعي
               </span>{" "}
               ودون انحياز خوارزمي
             </>
           ) : (
             <>
               Hire with{" "}
-              <span className="text-coral italic relative inline-block">
-                Verifiable Engineering Data
-                <svg
-                  className="absolute -bottom-1 left-0 w-full"
-                  height="6"
-                  viewBox="0 0 200 6"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 5 Q 100 0 200 5"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                    opacity="0.35"
-                  />
-                </svg>
+              <span className="text-gradient relative inline-block">
+                Verifiable AI Data
               </span>{" "}
               & Zero Hallucinations
             </>
@@ -152,30 +120,30 @@ export function LandingHero({ language }: LandingHeroProps) {
 
         {/* ── Sub-headline ── */}
         <motion.p
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.55 }}
-          className="font-body-lg text-ink/80 max-w-2xl leading-relaxed"
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="font-body-base text-muted-foreground max-w-3xl leading-relaxed text-lg"
           dir={isArabic ? "rtl" : "ltr"}
         >
           {isArabic
-            ? "ربط المرشحين بالشركات عبر بيئات برمجة معزولة (Sandboxed Technical Assessments) وسجلات تدقيق قابلة للمراجعة والتعديل البشري."
-            : "Connecting top engineering talent with verified positions via sandboxed code assessments and fully auditable compliance ledgers."}
+            ? "نربط أفضل الكفاءات بالشركات عبر بيئات تقييم معزولة (AI Sandboxes) وسجلات تدقيق ذكية تعتمد على الأداء الحقيقي وليس الكلمات الرنانة."
+            : "Connecting top engineering talent with verified positions via AI-powered code sandboxes and dynamic glassmorphic dashboards."}
         </motion.p>
 
         {/* ── CTAs ── */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.55 }}
-          className="flex flex-wrap items-center justify-center gap-4 pt-2"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-6 pt-4"
         >
           <Link
             href="/login"
             data-od-id="hero-cta-primary"
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-ink text-paper font-label-caps border border-transparent shadow-[4px_4px_0px_0px_rgba(224,62,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(224,62,0,1)] transition-all"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-label-caps rounded-full shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:shadow-[0_0_30px_rgba(139,92,246,0.7)] hover:-translate-y-1 transition-all duration-300"
           >
-            <span className="relative z-10">
+            <span className="relative z-10 font-bold">
               {isArabic ? "دخول منصة التوظيف" : "Access Workspace"}
             </span>
             {isArabic ? (
@@ -188,10 +156,10 @@ export function LandingHero({ language }: LandingHeroProps) {
           <Link
             href="/login"
             data-od-id="hero-cta-secondary"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-paper text-ink font-label-caps border-2 border-ink shadow-[4px_4px_0px_0px_rgba(20,20,20,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(20,20,20,1)] transition-all"
+            className="group inline-flex items-center gap-3 px-8 py-4 glass-card font-label-caps rounded-full hover:-translate-y-1 transition-all duration-300"
           >
-            <Play className="w-5 h-5 text-coral" fill="currentColor" />
-            <span>
+            <Play className="w-5 h-5 text-primary" fill="currentColor" />
+            <span className="font-bold">
               {isArabic ? "مشاهدة العرض التوضيحي" : "Watch Demo"}
             </span>
           </Link>
@@ -199,10 +167,10 @@ export function LandingHero({ language }: LandingHeroProps) {
 
         {/* ── Quick stats ── */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.55 }}
-          className="flex flex-wrap items-center justify-center gap-4 pt-2"
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-6 pt-12"
         >
           {[
             {
@@ -213,61 +181,27 @@ export function LandingHero({ language }: LandingHeroProps) {
             {
               icon: Award,
               value: <AnimatedCounter target={98} suffix="%" />,
-              label: isArabic ? "رضا العملاء" : "Client Satisfaction",
+              label: isArabic ? "دقة المطابقة" : "AI Match Accuracy",
             },
             {
               icon: Clock,
-              value: isArabic ? "دعم متاح 24/7" : "24/7 Support",
+              value: isArabic ? "تحليل فوري 24/7" : "24/7 Real-time",
               label: "",
             },
           ].map((item, i) => (
             <div
               key={i}
-              className="flex items-center gap-2 px-4 py-2 border border-border bg-paper font-data-mono text-ink/80"
+              className="flex items-center gap-3 px-6 py-3 glass-card rounded-2xl"
             >
-              <item.icon className="w-4 h-4 text-coral" />
-              <span className="font-bold text-ink">{item.value}</span>
-              {item.label && <span className="font-label-caps">{item.label}</span>}
+              <div className="p-2 rounded-full bg-primary/10">
+                <item.icon className="w-5 h-5 text-primary" />
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="font-bold text-foreground text-lg leading-tight">{item.value}</span>
+                {item.label && <span className="font-label-caps text-muted-foreground text-[10px]">{item.label}</span>}
+              </div>
             </div>
           ))}
-        </motion.div>
-
-        {/* ── Compliance badges ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.55 }}
-          className="flex flex-wrap items-center justify-center gap-2 pt-2"
-        >
-          {[
-            "SOC 2 Type II",
-            "GDPR Compliant",
-            "ISO 27001",
-            "HIPAA Ready",
-          ].map((badge) => (
-            <div
-              key={badge}
-              className="inline-flex items-center gap-1.5 px-3 py-1 font-label-caps text-ink/60 border border-dotted border-border"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-coral/70" />
-              <span>{badge}</span>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* ── Guarantee note ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.55 }}
-          className="mt-6 flex items-center gap-2 font-label-caps text-ink/50"
-        >
-          <Clock className="w-3.5 h-3.5" />
-          <span>
-            {isArabic
-              ? "الحد الأقصى للتأخير: 48 ساعة للتأهيل الأولي"
-              : "Max 48h initial screening delay guarantee"}
-          </span>
         </motion.div>
 
         <LanguageToggle />

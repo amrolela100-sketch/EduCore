@@ -275,7 +275,7 @@ export function MobileSidebarButton({ className }: { className?: string }) {
   return (
     <button
       onClick={() => setMobileOpen(true)}
-      className={cn("lg:hidden p-2 text-ink hover:bg-paper rounded-md transition-colors cursor-pointer", className)}
+      className={cn("lg:hidden p-2 text-foreground hover:bg-foreground/5 rounded-md transition-colors cursor-pointer", className)}
     >
       <PanelLeftOpen className="w-5 h-5" />
     </button>
